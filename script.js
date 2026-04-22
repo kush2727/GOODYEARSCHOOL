@@ -119,10 +119,11 @@ counters.forEach(counter => {
 
 // ===== AOS INITIALIZATION =====
 AOS.init({
-    duration: 800,
+    duration: 600,
     once: true,
     offset: 50,
-    disable: window.innerWidth < 768 ? 'mobile' : false
+    disable: window.innerWidth < 768 ? 'mobile' : false,
+    throttleDelay: 99
 });
 
 // ===== TESTIMONIALS CAROUSEL =====
