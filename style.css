@@ -891,8 +891,10 @@ h1, h2, h3, h4, h5, h6 {
     #mainNav .container {
         display: flex;
         align-items: center;
-        gap: 4px;
-        padding: 0 8px;
+        gap: 2px;
+        padding: 0 6px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .navbar-brand {
@@ -909,16 +911,16 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .brand-text {
-        display: none;
+        display: flex;
     }
 
     .brand-name {
-        font-size: 0.6rem;
-        letter-spacing: 0.1px;
+        font-size: 0.5rem;
+        letter-spacing: 0.05px;
     }
 
     .brand-tagline {
-        font-size: 0.35rem;
+        font-size: 0.3rem;
     }
 
     .navbar-toggler {
