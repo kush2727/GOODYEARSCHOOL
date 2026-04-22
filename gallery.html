@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photo Gallery - Goodyear English School">
+    <meta name="keywords" content="gallery, photos, events, campus">
+    <title>Photo Gallery - Goodyear English School</title>
+    <link rel="apple-touch-icon" href="pics/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="pics/favicon_io/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="pics/favicon_io/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="pics/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="pics/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="pics/favicon_io/site.webmanifest">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2.0">
+    <style>
+        /* Gallery Page Specific Styles */
+        .page-hero {
+            height: 400px;
+            background: linear-gradient(135deg, #dc143c 0%, #ff6b6b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .gallery-section {
+            padding: 80px 0;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            border: 2px solid var(--primary);
+            background: white;
+            color: var(--primary);
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--primary);
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 160, 23, 0.3);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            height: 250px;
+            display: block;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        /* Lightbox Styles */
+        .preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+            padding: 20px;
+        }
+
+        .preview-modal.show {
+            display: flex;
+        }
+
+        .preview-modal-content {
+            position: relative;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        #previewImg {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .preview-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
+            color: white;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 2001;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-close:hover {
+            background: var(--gold);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .preview-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transform: translateY(-50%);
+            padding: 0 15px;
+            pointer-events: none;
+        }
+
+        .preview-prev, .preview-next {
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid white;
+            color: white;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-prev:hover, .preview-next:hover {
+            background: var(--gold);
+            color: var(--primary);
+            border-color: var(--gold);
+            transform: scale(1.15);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .preview-modal-content {
+                max-width: 95%;
+                border-radius: 15px;
+            }
+
+            #previewImg {
+                max-height: 70vh;
+            }
+
+            .preview-prev, .preview-next {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+
+            .filter-buttons {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .no-data-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .no-data-message i {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .no-data-message h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .no-data-message p {
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="page-loader">
+        <div class="loader-inner">
+            <div class="loader-logo">GES</div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <div class="brand-logo">
+                    <img src="pics/5cafac26-91c0-4721-9ef9-f3d307d6e785_removalai_preview.png" alt="Goodyear Logo" class="logo-img">
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">Good year English School</span>
+                    <span class="brand-tagline">Since 1989</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-gold" href="admissions.html">Apply Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1 data-aos="fade-up">Photo Gallery</h1>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-3" data-aos="fade-up">Moments from Goodyear English School</h2>
+            <p class="text-center text-muted mb-5" data-aos="fade-up">Explore our vibrant campus life, events, and achievements</p>
+
+            <!-- Filter Buttons -->
+            <div class="filter-buttons" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="classrooms">Classrooms</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05017.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05019.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05020.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05021.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05022.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05023.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05024.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05025.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05026.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05027.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05028.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05029.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05030.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05031.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05032.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05033.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05034.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05035.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05036.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05037.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05038.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05039.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05040.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05041.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05042.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05043.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05044.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05045.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05046.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05047.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05048.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05049.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05050.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05051.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05052.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05053.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05054.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05055.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05056.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05057.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05058.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05059.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05060.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05061.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05062.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05063.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05064.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05065.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05066.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05067.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05068.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05069.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05070.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05071.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05072.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05073.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05074.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05075.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05076.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05077.JPG" alt="Gallery Image">
+                    
+                </div>
+                <div class="gallery-item" data-category="classrooms" data-aos="fade-up">
+                    <img src="pics/DSC05078.JPG" alt="Gallery Image">
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Preview Modal -->
+    <div id="previewModal" class="preview-modal">
+        <div class="preview-modal-content">
+            <button class="preview-close">&times;</button>
+            <img id="previewImg" src="" alt="Preview">
+            <div class="preview-nav">
+                <button class="preview-prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="preview-next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-brand">
+                            <i class="fas fa-graduation-cap footer-logo-icon"></i>
+                            <h4>Goodyear English School</h4>
+                            <p class="brand-since">Since 1989</p>
+                        </div>
+                        <p class="footer-desc">Nurturing young minds with quality education, strong values, and a passion for excellence for over 35 years.</p>
+                        <div class="footer-social">
+                            <a href="https://wa.me/916362516482" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://www.facebook.com/goodyear.englishschool?ref=1" target="_blank" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/goodyearenglishschool1989/" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <h5 class="footer-heading">Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                            <li><a href="admissions.html"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+                            <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="footer-heading">Contact Info</h5>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-map-marker-alt"></i> <a href="https://share.google/lLYWx9BbAHb1KQqiu" target="_blank" style="color: inherit; text-decoration: none;">Hennur Rd, 4th Block, HBR Layout, Bengaluru, Karnataka 560043</a></li>
+                            <li><i class="fas fa-phone"></i> +91 63625 16482</li>
+                            <li><i class="fas fa-envelope"></i> goodyearenglishschool1989@gmail.com</li>
+                            <li><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 4:00 PM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2024 Goodyear English School. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Social Buttons -->
+    <div class="floating-social">
+        <a href="https://wa.me/916362516482" target="_blank" class="float-btn whatsapp" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.facebook.com/goodyear.englishschool?ref=1" target="_blank" class="float-btn facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/goodyearenglishschool1989/" target="_blank" class="float-btn instagram" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTop" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js?v=2.0"></script>
+</body>
+</html>

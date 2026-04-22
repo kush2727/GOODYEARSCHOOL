@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admissions - Goodyear English School">
+    <meta name="keywords" content="admissions, enrollment, application">
+    <title>Admissions - Goodyear English School</title>
+    <link rel="apple-touch-icon" href="pics/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="pics/favicon_io/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="pics/favicon_io/android-chrome-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="pics/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="pics/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="pics/favicon_io/site.webmanifest">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2.0">
+    <style>
+        /* Admissions Page Specific Styles */
+        .page-hero {
+            height: 400px;
+            background: linear-gradient(135deg, #dc143c 0%, #ff6b6b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-top: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero h1 {
+            font-size: 3.5rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .admissions-section {
+            padding: 80px 0;
+        }
+
+        .process-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            border-top: 4px solid var(--gold);
+        }
+
+        .process-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow);
+        }
+
+        .process-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 0 auto 20px;
+        }
+
+        .process-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .process-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .eligibility-table {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .eligibility-table table {
+            margin-bottom: 0;
+        }
+
+        .eligibility-table thead {
+            background: linear-gradient(135deg, #dc143c 0%, #ff6b6b 100%);
+            color: white;
+        }
+
+        .eligibility-table th {
+            padding: 20px;
+            font-weight: 600;
+            border: none;
+        }
+
+        .eligibility-table td {
+            padding: 15px 20px;
+            border-color: #e9ecef;
+        }
+
+        .eligibility-table tbody tr:hover {
+            background: var(--light-bg);
+        }
+
+        .why-choose-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+
+        .why-choose-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow);
+        }
+
+        .why-choose-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .why-choose-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .why-choose-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .enquiry-form {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 12px 15px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 0.2rem rgba(212, 160, 23, 0.25);
+        }
+
+        .form-control::placeholder {
+            color: #adb5bd;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            color: var(--primary);
+            border: none;
+            padding: 12px 40px;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(212, 160, 23, 0.3);
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 160, 23, 0.4);
+        }
+
+        .download-brochure {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(10,31,92,0.3);
+        }
+
+        .download-brochure:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(10,31,92,0.4);
+            color: white;
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #dc143c 0%, #ff6b6b 100%);
+            color: white;
+            border: none;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+
+            .enquiry-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Loader -->
+    <div id="page-loader">
+        <div class="loader-inner">
+            <div class="loader-logo">GES</div>
+            <div class="loader-spinner"></div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <div class="brand-logo">
+                    <img src="pics/5cafac26-91c0-4721-9ef9-f3d307d6e785_removalai_preview.png" alt="Goodyear Logo" class="logo-img">
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">Good year English School</span>
+                    <span class="brand-tagline">Since 1989</span>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="admissions.html">Admissions</a></li>
+                    <li class="nav-item"><a class="nav-link" href="achievements.html">Achievements</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item ms-lg-3"><a class="btn btn-gold" href="admissions.html">Apply Now</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <h1 data-aos="fade-up">Admissions</h1>
+    </section>
+
+    <!-- Admission Process Section -->
+    <section class="admissions-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Admission Process</h2>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up">
+                    <div class="process-card">
+                        <div class="process-number">1</div>
+                        <h4>Enquiry</h4>
+                        <p>Submit your enquiry form with basic information about your child and preferred class.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="process-card">
+                        <div class="process-number">2</div>
+                        <h4>Application</h4>
+                        <p>Complete the application form and submit required documents including birth certificate and previous school records.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="process-card">
+                        <div class="process-number">3</div>
+                        <h4>Interview</h4>
+                        <p>Attend the entrance test and interview session. Parents and students are both interviewed.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="process-card">
+                        <div class="process-number">4</div>
+                        <h4>Enrollment</h4>
+                        <p>Upon selection, complete the enrollment process and pay the admission fee to secure your seat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Eligibility Section -->
+    <section class="admissions-section bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Eligibility Criteria</h2>
+            <div class="eligibility-table" data-aos="fade-up">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Age Group</th>
+                            <th>Eligibility</th>
+                            <th>Documents Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nursery</strong></td>
+                            <td>2.5 - 3.5 years</td>
+                            <td>No prior qualification required</td>
+                            <td>Birth Certificate, Vaccination Card</td>
+                        </tr>
+                        <tr>
+                            <td><strong>KG</strong></td>
+                            <td>3.5 - 4.5 years</td>
+                            <td>Nursery pass or equivalent</td>
+                            <td>Birth Certificate, Previous School Certificate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Class I</strong></td>
+                            <td>5 - 6 years</td>
+                            <td>KG pass or equivalent</td>
+                            <td>Birth Certificate, Previous School Certificate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Class II-V</strong></td>
+                            <td>7 - 11 years</td>
+                            <td>Previous class pass</td>
+                            <td>Birth Certificate, Previous School Certificate, Transfer Certificate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Class VI-VIII</strong></td>
+                            <td>11 - 14 years</td>
+                            <td>Previous class pass</td>
+                            <td>Birth Certificate, Previous School Certificate, Transfer Certificate</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Class IX-XII</strong></td>
+                            <td>14 - 18 years</td>
+                            <td>Previous class pass</td>
+                            <td>Birth Certificate, Previous School Certificate, Transfer Certificate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="admissions-section">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Why Choose Goodyear English School?</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="why-choose-card">
+                        <div class="why-choose-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4>Academic Excellence</h4>
+                        <p>Rigorous curriculum with focus on conceptual understanding and practical application of knowledge.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="why-choose-card">
+                        <div class="why-choose-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Experienced Faculty</h4>
+                        <p>Highly qualified teachers with years of experience in their respective fields and passion for teaching.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="why-choose-card">
+                        <div class="why-choose-icon">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <h4>Modern Infrastructure</h4>
+                        <p>State-of-the-art facilities including smart classrooms, labs, library, and sports complex.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enquiry Form Section -->
+    <section class="admissions-section bg-light" id="enquiry">
+        <div class="container">
+            <h2 class="section-title text-center mb-5" data-aos="fade-up">Enquiry Form</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="enquiry-form" data-aos="fade-up">
+                        <form id="enquiryForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Parent/Guardian Name *</label>
+                                        <input type="text" class="form-control" placeholder="Enter your name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Child's Name *</label>
+                                        <input type="text" class="form-control" placeholder="Enter child's name" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Email Address *</label>
+                                        <input type="email" class="form-control" placeholder="Enter email address" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Phone Number *</label>
+                                        <input type="tel" class="form-control" placeholder="Enter phone number" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Class Applying For *</label>
+                                        <select class="form-control" required>
+                                            <option value="">Select Class</option>
+                                            <option value="nursery">Nursery</option>
+                                            <option value="kg">KG</option>
+                                            <option value="class1">Class I</option>
+                                            <option value="class2">Class II</option>
+                                            <option value="class3">Class III</option>
+                                            <option value="class4">Class IV</option>
+                                            <option value="class5">Class V</option>
+                                            <option value="class6">Class VI</option>
+                                            <option value="class7">Class VII</option>
+                                            <option value="class8">Class VIII</option>
+                                            <option value="class9">Class IX</option>
+                                            <option value="class10">Class X</option>
+                                            <option value="class11">Class XI</option>
+                                            <option value="class12">Class XII</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="form-label">Child's Date of Birth *</label>
+                                        <input type="date" class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Message</label>
+                                <textarea class="form-control" placeholder="Any additional information or questions..."></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-submit">Submit Enquiry</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Brochure Section -->
+    <section class="admissions-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="section-title">Download Our Brochure</h2>
+                    <p class="section-subtitle">Get Complete Information About Our School</p>
+                    <p class="welcome-text">Our comprehensive brochure contains detailed information about our curriculum, facilities, fee structure, and admission process. Download it to learn more about what makes Goodyear English School the perfect choice for your child's education.</p>
+                    <a href="#" class="download-brochure">
+                        <i class="fas fa-download"></i> Download Brochure (PDF)
+                    </a>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800&auto=format&fit=crop" alt="Brochure" class="img-fluid rounded-premium">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="footer-brand">
+                            <i class="fas fa-graduation-cap footer-logo-icon"></i>
+                            <h4>Goodyear English School</h4>
+                            <p class="brand-since">Since 1989</p>
+                        </div>
+                        <p class="footer-desc">Nurturing young minds with quality education, strong values, and a passion for excellence for over 35 years.</p>
+                        <div class="footer-social">
+                            <a href="https://wa.me/916362516482" target="_blank" class="social-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://www.facebook.com/goodyear.englishschool?ref=1" target="_blank" class="social-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/goodyearenglishschool1989/" target="_blank" class="social-btn instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6">
+                        <h5 class="footer-heading">Quick Links</h5>
+                        <ul class="footer-links">
+                            <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                            <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                            <li><a href="admissions.html"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+                            <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                            <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <h5 class="footer-heading">Contact Info</h5>
+                        <ul class="footer-contact">
+                            <li><i class="fas fa-map-marker-alt"></i> <a href="https://share.google/lLYWx9BbAHb1KQqiu" target="_blank" style="color: inherit; text-decoration: none;">Hennur Rd, 4th Block, HBR Layout, Bengaluru, Karnataka 560043</a></li>
+                            <li><i class="fas fa-phone"></i> +91 63625 16482</li>
+                            <li><i class="fas fa-envelope"></i> goodyearenglishschool1989@gmail.com</li>
+                            <li><i class="fas fa-clock"></i> Mon - Sat: 8:00 AM - 4:00 PM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <p>&copy; 2024 Goodyear English School. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Social Buttons -->
+    <div class="floating-social">
+        <a href="https://wa.me/916362516482" target="_blank" class="float-btn whatsapp" title="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="https://www.facebook.com/goodyear.englishschool?ref=1" target="_blank" class="float-btn facebook" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/goodyearenglishschool1989/" target="_blank" class="float-btn instagram" title="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTop" title="Back to Top"><i class="fas fa-chevron-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js?v=2.0"></script>
+</body>
+</html>
