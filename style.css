@@ -888,6 +888,64 @@ h1, h2, h3, h4, h5, h6 {
         margin-right: 0;
     }
 
+    #mainNav .container {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .navbar-brand {
+        gap: 6px;
+        margin-right: 8px;
+    }
+
+    .brand-logo {
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        min-height: 50px;
+    }
+
+    .brand-name {
+        font-size: 0.6rem;
+        letter-spacing: 0.1px;
+    }
+
+    .brand-tagline {
+        font-size: 0.35rem;
+    }
+
+    .navbar-toggler {
+        display: none;
+    }
+
+    .navbar-collapse {
+        display: flex !important;
+        flex-basis: auto;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        gap: 4px;
+    }
+
+    .navbar-nav .nav-link {
+        font-size: 0.6rem;
+        margin: 0 2px;
+        padding: 0.2rem 0;
+        white-space: nowrap;
+    }
+
+    .btn-gold {
+        padding: 0.25rem 0.6rem;
+        font-size: 0.6rem;
+    }
+
+    #mainNav {
+        padding: 0.05rem 0;
+    }
+
     .hero {
         height: 70vh;
         margin-top: 45px;
@@ -895,30 +953,6 @@ h1, h2, h3, h4, h5, h6 {
         background-size: cover;
         background-position: center;
         background-attachment: scroll;
-    }
-
-    .brand-name {
-        font-size: 0.7rem;
-        letter-spacing: 0.15px;
-    }
-
-    .brand-tagline {
-        font-size: 0.45rem;
-    }
-
-    .navbar-nav .nav-link {
-        font-size: 0.7rem;
-        margin: 0 5px;
-        padding: 0.25rem 0;
-    }
-
-    .btn-gold {
-        padding: 0.35rem 0.9rem;
-        font-size: 0.7rem;
-    }
-
-    #mainNav {
-        padding: 0.05rem 0;
     }
 
     .hero {
