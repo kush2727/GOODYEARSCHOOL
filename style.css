@@ -866,185 +866,304 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 480px) {
     html {
-        font-size: 13px;
+        font-size: 12px;
+    }
+
+    body {
+        overflow-x: hidden;
     }
 
     .brand-logo {
-        width: 55px;
-        height: 55px;
-        min-width: 55px;
-        min-height: 55px;
+        width: 50px;
+        height: 50px;
+        min-width: 50px;
+        min-height: 50px;
     }
 
     .brand-name {
-        font-size: 0.75rem;
-        letter-spacing: 0.2px;
+        font-size: 0.7rem;
+        letter-spacing: 0.15px;
     }
 
     .brand-tagline {
-        font-size: 0.5rem;
+        font-size: 0.45rem;
     }
 
     .navbar-nav .nav-link {
-        font-size: 0.75rem;
-        margin: 0 6px;
-        padding: 0.3rem 0;
+        font-size: 0.7rem;
+        margin: 0 5px;
+        padding: 0.25rem 0;
     }
 
     .btn-gold {
-        padding: 0.4rem 1rem;
-        font-size: 0.75rem;
+        padding: 0.35rem 0.9rem;
+        font-size: 0.7rem;
+    }
+
+    #mainNav {
+        padding: 0.05rem 0;
     }
 
     .hero {
-        height: 70vh;
-        margin-top: 50px;
+        height: 60vh;
+        margin-top: 45px;
     }
 
     .hero-title {
-        font-size: 1.8rem;
-        margin-bottom: 10px;
+        font-size: 1.6rem;
+        margin-bottom: 8px;
     }
 
     .hero-tagline {
-        font-size: 0.9rem;
-        margin-bottom: 20px;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
     }
 
     .hero-buttons {
-        gap: 10px;
+        gap: 8px;
         flex-direction: column;
     }
 
     .hero-buttons .btn {
-        padding: 0.8rem 1.5rem;
-        font-size: 0.85rem;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.75rem;
+    }
+
+    .scroll-indicator {
+        bottom: 15px;
+        font-size: 1.2rem;
     }
 
     .section-title {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
+        font-size: 1.3rem;
+        margin-bottom: 8px;
     }
 
     .section-subtitle {
-        font-size: 1rem;
-        margin-bottom: 20px;
-    }
-
-    .welcome-text {
-        font-size: 0.95rem;
-        margin-bottom: 20px;
-    }
-
-    .welcome-list li {
-        margin-bottom: 10px;
         font-size: 0.9rem;
-    }
-
-    .highlight-card {
-        padding: 25px 15px;
         margin-bottom: 15px;
-    }
-
-    .highlight-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-        margin: 0 auto 15px;
-    }
-
-    .highlight-card h4 {
-        font-size: 1.1rem;
-        margin-bottom: 10px;
-    }
-
-    .highlight-card p {
-        font-size: 0.85rem;
-    }
-
-    .testimonial-card {
-        padding: 30px 20px;
-    }
-
-    .testimonial-text {
-        font-size: 0.95rem;
-        margin-bottom: 15px;
-    }
-
-    .testimonial-author {
-        font-size: 1rem;
-    }
-
-    .testimonial-role {
-        font-size: 0.8rem;
-    }
-
-    .accordion-button {
-        padding: 15px;
-        font-size: 0.9rem;
-    }
-
-    .accordion-body {
-        padding: 15px;
-        font-size: 0.85rem;
-    }
-
-    .floating-social {
-        right: 8px;
-        bottom: 60px;
-        gap: 8px;
-    }
-
-    .float-btn {
-        width: 40px;
-        height: 40px;
-        font-size: 0.95rem;
-    }
-
-    #scrollTop {
-        width: 40px;
-        height: 40px;
-        font-size: 0.95rem;
-        bottom: 15px;
-        right: 8px;
     }
 
     .welcome {
-        padding: 40px 0;
+        padding: 30px 0;
+    }
+
+    .welcome-text {
+        font-size: 0.85rem;
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+
+    .welcome-list li {
+        margin-bottom: 8px;
+        font-size: 0.8rem;
+    }
+
+    .welcome-list i {
+        margin-right: 8px;
+        font-size: 1rem;
+    }
+
+    .img-fluid.rounded-premium {
+        max-height: 250px;
     }
 
     .highlights {
-        padding: 40px 0;
+        padding: 30px 0;
+    }
+
+    .highlight-card {
+        padding: 20px 12px;
+        margin-bottom: 12px;
+    }
+
+    .highlight-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        margin: 0 auto 12px;
+    }
+
+    .highlight-card h4 {
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+
+    .highlight-card p {
+        font-size: 0.8rem;
     }
 
     .testimonials {
-        padding: 40px 0;
+        padding: 30px 0;
     }
 
-    .faq {
-        padding: 40px 0;
+    .testimonial-card {
+        padding: 25px 15px;
     }
 
-    .achievements {
-        padding: 40px 0;
-    }
-
-    .achievements-placeholder {
-        padding: 40px 20px;
-    }
-
-    .achievements-placeholder i {
-        font-size: 2.5rem;
+    .testimonial-quote {
+        font-size: 2rem;
         margin-bottom: 15px;
     }
 
-    .achievements-placeholder h3 {
-        font-size: 1.3rem;
+    .testimonial-text {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+
+    .testimonial-author {
+        font-size: 0.9rem;
+        margin-bottom: 3px;
+    }
+
+    .testimonial-role {
+        font-size: 0.75rem;
+    }
+
+    .carousel-control-prev, .carousel-control-next {
+        width: 35px;
+        height: 35px;
+    }
+
+    .faq {
+        padding: 30px 0;
+    }
+
+    .accordion-item {
         margin-bottom: 10px;
     }
 
+    .accordion-button {
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+
+    .accordion-body {
+        padding: 12px;
+        font-size: 0.75rem;
+    }
+
+    .achievements {
+        padding: 30px 0;
+    }
+
+    .achievements-placeholder {
+        padding: 30px 15px;
+    }
+
+    .achievements-placeholder i {
+        font-size: 2.2rem;
+        margin-bottom: 12px;
+    }
+
+    .achievements-placeholder h3 {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+
     .achievements-placeholder p {
+        font-size: 0.85rem;
+    }
+
+    .site-footer {
+        padding-top: 40px;
+    }
+
+    .footer-brand {
+        margin-bottom: 20px;
+    }
+
+    .footer-logo-icon {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+
+    .footer-brand h4 {
+        font-size: 1.1rem;
+        margin-bottom: 3px;
+    }
+
+    .brand-since {
+        font-size: 0.8rem;
+    }
+
+    .footer-desc {
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+    }
+
+    .footer-social {
+        gap: 10px;
+    }
+
+    .social-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .footer-heading {
         font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .footer-links li {
+        margin-bottom: 10px;
+    }
+
+    .footer-links a {
+        font-size: 0.8rem;
+        gap: 6px;
+    }
+
+    .footer-contact li {
+        margin-bottom: 12px;
+        font-size: 0.8rem;
+    }
+
+    .footer-contact i {
+        min-width: 18px;
+    }
+
+    .footer-bottom {
+        padding: 20px 0;
+        font-size: 0.75rem;
+    }
+
+    .floating-social {
+        right: 5px;
+        bottom: 55px;
+        gap: 6px;
+    }
+
+    .float-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+    }
+
+    #scrollTop {
+        width: 38px;
+        height: 38px;
+        font-size: 0.9rem;
+        bottom: 10px;
+        right: 5px;
+    }
+
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .row {
+        margin-left: -6px;
+        margin-right: -6px;
+    }
+
+    .col-lg-6, .col-md-6 {
+        padding-left: 6px;
+        padding-right: 6px;
     }
 }
 @media (max-width: 768px) {
