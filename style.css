@@ -898,29 +898,34 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .navbar-brand {
-        gap: 4px;
-        margin-right: 4px;
+        gap: 6px;
+        margin-right: auto;
         flex-shrink: 0;
     }
 
     .brand-logo {
-        width: 40px;
-        height: 40px;
-        min-width: 40px;
-        min-height: 40px;
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+        min-height: 45px;
     }
 
     .brand-text {
         display: flex;
+        flex-direction: column;
+        gap: 0px;
+        flex-shrink: 0;
     }
 
     .brand-name {
-        font-size: 0.5rem;
+        font-size: 0.65rem;
         letter-spacing: 0.05px;
+        line-height: 1;
     }
 
     .brand-tagline {
-        font-size: 0.3rem;
+        font-size: 0.35rem;
+        line-height: 1;
     }
 
     .navbar-toggler {
@@ -933,12 +938,13 @@ h1, h2, h3, h4, h5, h6 {
         overflow-x: auto;
         overflow-y: hidden;
         -webkit-overflow-scrolling: touch;
+        margin-left: auto;
     }
 
     .navbar-nav {
         display: flex;
         flex-direction: row;
-        gap: 2px;
+        gap: 1px;
         flex-wrap: nowrap;
         white-space: nowrap;
     }
@@ -948,15 +954,15 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .navbar-nav .nav-link {
-        font-size: 0.55rem;
+        font-size: 0.5rem;
         margin: 0 1px;
-        padding: 0.15rem 0.3rem;
+        padding: 0.1rem 0.2rem;
         white-space: nowrap;
     }
 
     .btn-gold {
-        padding: 0.2rem 0.4rem;
-        font-size: 0.55rem;
+        padding: 0.15rem 0.3rem;
+        font-size: 0.5rem;
         flex-shrink: 0;
     }
 
