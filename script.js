@@ -21,6 +21,14 @@ window.addEventListener('load', function() {
     }
 });
 
+// Prevent loader from showing on page navigation
+window.addEventListener('beforeunload', function() {
+    const loader = document.getElementById('page-loader');
+    if (loader && sessionStorage.getItem('siteVisited')) {
+        loader.style.display = 'none';
+    }
+});
+
 // ===== NAVBAR SCROLL EFFECT =====
 let ticking = false;
 const navbar = document.getElementById('mainNav');
@@ -477,3 +485,14 @@ if ('IntersectionObserver' in window) {
         imageObserver.observe(img);
     });
 }
+
+
+// ===== PAGE LOADER - Hide on navigation =====
+document.addEventListener('DOMContentLoaded', function() {
+    const loader = document.getElementById('page-loader');
+    if (loader && sessionStorage.getItem('siteVisited')) {
+        // If already visited, hide loader immediately
+        loader.style.display = 'none';
+        loader.style.pointerEvents = 'none';
+    }
+});
