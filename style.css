@@ -230,9 +230,8 @@ h1, h2, h3, h4, h5, h6 {
 /* ===== HERO SECTION ===== */
 .hero {
     height: 100vh;
-    background-size: 80%;
+    background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     background-attachment: fixed;
     position: relative;
     display: flex;
@@ -890,11 +889,12 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .hero {
-        height: 60vh;
+        height: 70vh;
         margin-top: 45px;
         width: 100%;
-        background-size: 100%;
+        background-size: cover;
         background-position: center;
+        background-attachment: scroll;
     }
 
     .brand-name {
